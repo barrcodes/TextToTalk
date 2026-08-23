@@ -22,7 +22,7 @@ public enum DialogueSessionState
 
 public class DialogueSessionService : IDisposable
 {
-    private const int EndDelayFrames = 3;
+    private static readonly TimeSpan SessionEndDelay = TimeSpan.FromMilliseconds(1000);
 
     private readonly IFramework framework;
     private readonly IClientState clientState;
@@ -33,7 +33,7 @@ public class DialogueSessionService : IDisposable
     private readonly IAddonBattleTalkManager addonBattleTalkManager;
 
     private DialogueSessionState state = DialogueSessionState.Inactive;
-    private int inactiveFrames;
+    private DateTime? inactiveSinceUtc;
     private Guid sessionId;
     private TextSource sessionSource = TextSource.None;
 
@@ -68,12 +68,19 @@ public class DialogueSessionService : IDisposable
 
         this.framework.Run(() =>
         {
-            if (state == DialogueSessionState.Inactive)
+            try
             {
-                StartSession(source, DialogueEventReason.TextReceived);
-            }
+                if (state == DialogueSessionState.Inactive)
+                {
+                    StartSession(source, DialogueEventReason.TextReceived);
+                }
 
-            ResetInactiveFrames();
+                ResetInactiveSince();
+            }
+            catch (Exception ex)
+            {
+                DetailedLog.Error(ex, "Failed to update dialogue session");
+            }
         });
     }
 
@@ -81,6 +88,18 @@ public class DialogueSessionService : IDisposable
     {
         var talkVisible = addonTalkManager.IsVisible();
         var battleTalkVisible = addonBattleTalkManager.IsVisible();
+        var context = new DialogueContextSnapshot(
+            talkVisible,
+            battleTalkVisible,
+            addonSelectStringManager.IsVisible(),
+            addonSelectIconStringManager.IsVisible(),
+            condition[ConditionFlag.OccupiedInCutSceneEvent],
+            condition[ConditionFlag.WatchingCutscene],
+            condition[ConditionFlag.WatchingCutscene78],
+            condition[ConditionFlag.OccupiedInQuestEvent],
+            // Temporary debugging conditions; do not use these as session-start signals yet.
+            condition[ConditionFlag.Occupied33],
+            condition[ConditionFlag.OccupiedInEvent]);
 
         if (talkVisible && !prevTalkVisible)
             OnDialogueAddonShown(TextSource.AddonTalk);
@@ -91,29 +110,28 @@ public class DialogueSessionService : IDisposable
         prevBattleTalkVisible = battleTalkVisible;
 
         if (state == DialogueSessionState.Inactive)
+        {
+            if (context.StartsSession)
+                StartSession(TextSource.None, DialogueEventReason.DialogueContextStarted);
+        }
+
+        if (state == DialogueSessionState.Inactive)
             return;
 
-        if (HasContinuationContext(talkVisible, battleTalkVisible))
+        if (context.HasContinuationContext)
         {
-            ResetInactiveFrames();
+            ResetInactiveSince();
             return;
         }
 
-        if (++inactiveFrames >= EndDelayFrames)
+        if (inactiveSinceUtc is null)
+        {
+            inactiveSinceUtc = DateTime.UtcNow;
+        }
+        else if (DateTime.UtcNow - inactiveSinceUtc.Value >= SessionEndDelay)
         {
             EndSession(DialogueEventReason.DialogueContextEnded);
         }
-    }
-
-    private bool HasContinuationContext(bool talkVisible, bool battleTalkVisible)
-    {
-        return talkVisible ||
-               battleTalkVisible ||
-               addonSelectStringManager.IsVisible() ||
-               addonSelectIconStringManager.IsVisible() ||
-               condition[ConditionFlag.WatchingCutscene] ||
-               condition[ConditionFlag.WatchingCutscene78] ||
-               condition[ConditionFlag.OccupiedInQuestEvent];
     }
 
     private void OnDialogueAddonShown(TextSource source)
@@ -123,7 +141,7 @@ public class DialogueSessionService : IDisposable
             StartSession(source, DialogueEventReason.AddonShown);
         }
 
-        ResetInactiveFrames();
+        ResetInactiveSince();
     }
 
     private void StartSession(TextSource source, DialogueEventReason reason)
@@ -131,18 +149,19 @@ public class DialogueSessionService : IDisposable
         state = DialogueSessionState.Active;
         sessionId = Guid.NewGuid();
         sessionSource = source;
-        inactiveFrames = 0;
+        inactiveSinceUtc = null;
 
         onEvent.OnNext(new NpcDialogueSessionStartedEvent(source)
         {
             SessionId = sessionId,
             Reason = reason,
         });
+
     }
 
-    private void ResetInactiveFrames()
+    private void ResetInactiveSince()
     {
-        inactiveFrames = 0;
+        inactiveSinceUtc = null;
     }
 
     private void EndSession(DialogueEventReason reason)
@@ -159,7 +178,7 @@ public class DialogueSessionService : IDisposable
         state = DialogueSessionState.Inactive;
         sessionId = Guid.Empty;
         sessionSource = TextSource.None;
-        inactiveFrames = 0;
+        inactiveSinceUtc = null;
     }
 
     private void OnTerritoryChanged(uint _) => EndSession(DialogueEventReason.TerritoryChanged);
@@ -175,5 +194,32 @@ public class DialogueSessionService : IDisposable
         this.framework.Update -= OnFrameworkUpdate;
 
         onEvent.Dispose();
+    }
+
+    private readonly record struct DialogueContextSnapshot(
+        bool TalkVisible,
+        bool BattleTalkVisible,
+        bool SelectStringVisible,
+        bool SelectIconStringVisible,
+        bool OccupiedInCutSceneEvent,
+        bool WatchingCutscene,
+        bool WatchingCutscene78,
+        bool OccupiedInQuestEvent,
+        bool Occupied33,
+        bool OccupiedInEvent)
+    {
+        public bool StartsSession => OccupiedInCutSceneEvent ||
+                                     WatchingCutscene ||
+                                     WatchingCutscene78 ||
+                                     OccupiedInQuestEvent;
+
+        public bool HasContinuationContext => TalkVisible ||
+                                              BattleTalkVisible ||
+                                              SelectStringVisible ||
+                                              SelectIconStringVisible ||
+                                              StartsSession ||
+                                              // Temporary debugging conditions; do not use these as session-start signals yet.
+                                              Occupied33 ||
+                                              OccupiedInEvent;
     }
 }
