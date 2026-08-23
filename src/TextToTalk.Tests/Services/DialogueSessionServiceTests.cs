@@ -45,6 +45,13 @@ public class DialogueSessionServiceTests
     private void AdvanceFrame() =>
         framework.Raise(f => f.Update += null, framework.Object);
 
+    private void EndAfterInactivity()
+    {
+        AdvanceFrame();
+        Thread.Sleep(1050);
+        AdvanceFrame();
+    }
+
     // ---------------------------------------------------------------
     // Session start
     // ---------------------------------------------------------------
@@ -299,18 +306,25 @@ public class DialogueSessionServiceTests
         Assert.Single(events);
     }
 
-    [Fact]
-    public void BroadCondition_DoesNotStartSession()
+    [Theory]
+    [InlineData(ConditionFlag.OccupiedInCutSceneEvent)]
+    [InlineData(ConditionFlag.WatchingCutscene)]
+    [InlineData(ConditionFlag.WatchingCutscene78)]
+    [InlineData(ConditionFlag.OccupiedInQuestEvent)]
+    public void DialogueStartCondition_StartsAndContinuesSession(ConditionFlag flag)
     {
         using var service = CreateService();
         using var events = service.OnEvent.ToLiveList();
 
-        condition.Setup(c => c[ConditionFlag.WatchingCutscene]).Returns(true);
+        condition.Setup(c => c[flag]).Returns(true);
 
         for (var i = 0; i < 10; i++)
             AdvanceFrame();
 
-        Assert.Empty(events);
+        Assert.Single(events);
+        var started = Assert.IsType<NpcDialogueSessionStartedEvent>(events[0]);
+        Assert.Equal(TextSource.None, started.Source);
+        Assert.Equal(DialogueEventReason.DialogueContextStarted, started.Reason);
     }
 
     // ---------------------------------------------------------------
@@ -325,9 +339,7 @@ public class DialogueSessionServiceTests
 
         service.NotifyDialogue(TextSource.AddonTalk);
 
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         Assert.Equal(2, events.Count);
         var ended = Assert.IsType<NpcDialogueSessionEndedEvent>(events[1]);
@@ -342,7 +354,7 @@ public class DialogueSessionServiceTests
 
         service.NotifyDialogue(TextSource.AddonTalk);
 
-        // Two frames without context (below the threshold of 3)
+        // A brief gap without context (below the 1000 ms threshold)
         AdvanceFrame();
         AdvanceFrame();
 
@@ -365,7 +377,7 @@ public class DialogueSessionServiceTests
 
         service.NotifyDialogue(TextSource.AddonTalk);
 
-        // Two frames without context (below the threshold)
+        // A brief gap without context (below the 1000 ms threshold)
         AdvanceFrame();
         AdvanceFrame();
 
@@ -388,9 +400,7 @@ public class DialogueSessionServiceTests
 
         service.NotifyDialogue(TextSource.AddonTalk);
 
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         // Many more inactive frames
         for (var i = 0; i < 10; i++)
@@ -506,9 +516,7 @@ public class DialogueSessionServiceTests
         service.NotifyDialogue(TextSource.AddonTalk);
         var sessionId = ((NpcDialogueSessionStartedEvent)events[0]).SessionId;
 
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         var ended = Assert.IsType<NpcDialogueSessionEndedEvent>(events[1]);
         Assert.Equal(IpcEventType.NpcDialogueSessionEnded, ended.EventType);
@@ -527,9 +535,7 @@ public class DialogueSessionServiceTests
         var started = Assert.IsType<NpcDialogueSessionStartedEvent>(events[0]);
         Assert.Equal(TextSource.AddonBattleTalk, started.Source);
 
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         var ended = Assert.IsType<NpcDialogueSessionEndedEvent>(events[1]);
         Assert.Equal(TextSource.AddonBattleTalk, ended.Source);
@@ -548,9 +554,7 @@ public class DialogueSessionServiceTests
         Assert.Equal(TextSource.AddonBattleTalk, started.Source);
 
         battleTalk.Setup(x => x.IsVisible()).Returns(false);
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         var ended = Assert.IsType<NpcDialogueSessionEndedEvent>(events[1]);
         Assert.Equal(TextSource.AddonBattleTalk, ended.Source);
@@ -587,9 +591,7 @@ public class DialogueSessionServiceTests
         // Cutscene ends, all UI closes
         talk.Setup(x => x.IsVisible()).Returns(false);
         condition.Setup(c => c[ConditionFlag.WatchingCutscene]).Returns(false);
-        AdvanceFrame();
-        AdvanceFrame();
-        AdvanceFrame();
+        EndAfterInactivity();
 
         Assert.Equal(2, events.Count);
         Assert.IsType<NpcDialogueSessionStartedEvent>(events[0]);

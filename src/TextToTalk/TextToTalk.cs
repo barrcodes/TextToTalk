@@ -257,9 +257,24 @@ private readonly IDalamudPluginInterface pluginInterface;
                     ev => FunctionalUtils.RunSafely(
                         () =>
                         {
-                            Say(ev.Speaker, ev.SpeakerName, ev.GetChatType(), ev.Text.TextValue, ev.RawText,
-                                ev.Source, ev is ChatTextEmitEvent chatEvent ? chatEvent.SpeakerWorld : null);
-                            this.dialogueSessionService.NotifyDialogue(ev.Source);
+                            try
+                            {
+                                Say(ev.Speaker, ev.SpeakerName, ev.GetChatType(), ev.Text.TextValue, ev.RawText,
+                                    ev.Source, ev is ChatTextEmitEvent chatEvent ? chatEvent.SpeakerWorld : null);
+                            }
+                            catch (Exception ex)
+                            {
+                                DetailedLog.Error(ex, "Failed to say dialogue");
+                            }
+
+                            try
+                            {
+                                this.dialogueSessionService.NotifyDialogue(ev.Source);
+                            }
+                            catch (Exception ex)
+                            {
+                                DetailedLog.Error(ex, "Failed to notify dialogue session");
+                            }
                         },
                         ex => DetailedLog.Error(ex, "Failed to handle text emit event")),
                     ex => DetailedLog.Error(ex, "Text emit event sequence has faulted"),

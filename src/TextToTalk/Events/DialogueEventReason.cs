@@ -4,6 +4,7 @@ public enum DialogueEventReason
 {
     TextReceived,
     AddonShown,
+    DialogueContextStarted,
     DialogueContextEnded,
     TerritoryChanged,
     LoggedOut,
