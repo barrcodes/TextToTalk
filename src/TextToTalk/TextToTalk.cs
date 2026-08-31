@@ -121,8 +121,8 @@ private readonly IDalamudPluginInterface pluginInterface;
 
             this.pluginInterface = pi;
             this.clientState = clientState;
-            this.localizer = new Localizer(clientState.ClientLanguage);
-            this.localizer.SetUiLanguage(clientState.ClientLanguage, pi.UiLanguage, CultureInfo.CurrentUICulture);
+            this.localizer = new Localizer(pi.UiLanguage);
+            this.localizer.SetUiLanguage(pi.UiLanguage);
             this.pluginInterface.LanguageChanged += OnDalamudLanguageChanged;
             this.objects = objects;
             this.keys = keyState;
@@ -632,7 +632,7 @@ private readonly IDalamudPluginInterface pluginInterface;
 
         private void OnDalamudLanguageChanged(string languageCode)
         {
-            this.localizer.SetUiLanguage(this.clientState.ClientLanguage, languageCode, CultureInfo.CurrentUICulture);
+            this.localizer.SetUiLanguage(languageCode);
         }
 
         #region IDisposable Support

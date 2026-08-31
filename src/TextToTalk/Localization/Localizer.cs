@@ -1,46 +1,50 @@
 using System;
 using System.Globalization;
 using Dalamud.Game;
-using Dalamud.Utility;
 using TextToTalk.Resources;
 
 namespace TextToTalk.Localization;
 
 public sealed class Localizer
 {
-    public Localizer(ClientLanguage language)
+    public Localizer(string uiLanguage)
     {
-        SetLanguage(language);
+        SetLanguage(uiLanguage);
     }
 
     public CultureInfo Culture { get; private set; } = CultureInfo.InvariantCulture;
     public ClientLanguage GameDataLanguage { get; private set; }
+    public bool HasGameDataSheet { get; private set; }
 
-    public static ClientLanguage ResolveLanguage(ClientLanguage clientLanguage, string uiLanguage,
-        CultureInfo systemUiCulture)
+    public void SetUiLanguage(string uiLanguage) => SetLanguage(uiLanguage);
+
+    private void SetLanguage(string uiLanguage)
     {
-        if (string.Equals(uiLanguage, systemUiCulture.TwoLetterISOLanguageName, StringComparison.OrdinalIgnoreCase))
-        {
-            return clientLanguage;
-        }
-
-        return uiLanguage.ToLowerInvariant() switch
+        GameDataLanguage = uiLanguage.ToLowerInvariant() switch
         {
             "ja" => ClientLanguage.Japanese,
             "de" => ClientLanguage.German,
             "fr" => ClientLanguage.French,
             _ => ClientLanguage.English,
         };
+        HasGameDataSheet = uiLanguage.Equals("en", StringComparison.OrdinalIgnoreCase)
+                           || uiLanguage.Equals("ja", StringComparison.OrdinalIgnoreCase)
+                           || uiLanguage.Equals("de", StringComparison.OrdinalIgnoreCase)
+                           || uiLanguage.Equals("fr", StringComparison.OrdinalIgnoreCase);
+        Culture = GetCulture(uiLanguage);
+        Strings.Culture = Culture;
     }
 
-    public void SetUiLanguage(ClientLanguage clientLanguage, string uiLanguage, CultureInfo systemUiCulture) =>
-        SetLanguage(ResolveLanguage(clientLanguage, uiLanguage, systemUiCulture));
-
-    private void SetLanguage(ClientLanguage language)
+    private static CultureInfo GetCulture(string dalamudLanguage)
     {
-        GameDataLanguage = language;
-        Culture = CultureInfo.GetCultureInfo(language.ToCode());
-        Strings.Culture = Culture;
+        var cultureName = dalamudLanguage switch
+        {
+            "zh" => "zh-Hans",
+            "tw" => "zh-Hant",
+            _ => dalamudLanguage,
+        };
+
+        return CultureInfo.GetCultureInfo(cultureName);
     }
 
     public string Get(string key) =>

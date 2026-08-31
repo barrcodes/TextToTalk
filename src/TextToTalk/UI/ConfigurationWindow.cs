@@ -667,7 +667,7 @@ namespace TextToTalk.UI
                 }
 
                 var selected = currentEnabledChatTypesPreset.EnabledChatTypes?.Contains((int)enumValue) ?? false;
-                if (!ImGui.Checkbox($"{FormatChatChannelName(channel, (int)enumValue)}##{channel}", ref selected)) continue;
+                if (!ImGui.Checkbox($"{FormatChatChannelName((int)enumValue)}##{channel}", ref selected)) continue;
                 var isEnabled = currentEnabledChatTypesPreset.EnabledChatTypes?.Contains((int)enumValue) ?? false;
                 if (isEnabled)
                 {
@@ -682,16 +682,19 @@ namespace TextToTalk.UI
             }
         }
 
-        private string FormatChatChannelName(string channel, int chatType)
+        private string FormatChatChannelName(int chatType)
         {
             if (ChatTypeMap.GmBaseChatTypes.TryGetValue((XivChatType)chatType, out var baseChatType))
             {
-                if (ChatTypeMap.TryGetLogFilterName(this.data, this.localizer.GameDataLanguage, (int)baseChatType, out var baseName))
+                if (this.localizer.HasGameDataSheet)
                 {
-                    return $"GM {baseName}";
+                    if (ChatTypeMap.TryGetLogFilterName(this.data, this.localizer.GameDataLanguage, (int)baseChatType, out var baseName))
+                    {
+                        return $"GM {baseName}";
+                    }
                 }
 
-                return $"GM {FormatChatChannelName(baseChatType.ToString(), (int)baseChatType)}";
+                return $"GM {FormatChatChannelName((int)baseChatType)}";
             }
 
             if (ChatTypeMap.TryGetAdditionalChannelName(chatType, out var additionalName))
@@ -699,45 +702,26 @@ namespace TextToTalk.UI
                 return additionalName;
             }
 
-            if (ChatTypeMap.TryGetLogFilterName(this.data, this.localizer.GameDataLanguage, chatType, out var logFilterName))
+            if (this.localizer.HasGameDataSheet)
             {
-                return logFilterName;
-            }
-
-            if (ChatTypeMap.TryGetAddonName(this.data, this.localizer.GameDataLanguage, chatType, out var addonName))
-            {
-                return addonName;
-            }
-
-            // Split enum value name into words
-            var split = channel == "PvPTeam" ? "PvP Team" : SplitWords(channel);
-
-            // Handle linkshells
-            return split.StartsWith("Ls ") ? split.ToUpper() : split;
-        }
-
-        private static string SplitWords(string oneWord)
-        {
-            var words = oneWord
-                .Select(c => c)
-                .Skip(1)
-                .Aggregate("" + oneWord[0],
-                    (acc, c) => acc + (c is >= 'A' and <= 'Z' or >= '0' and <= '9' ? " " + c : "" + c))
-                .Split(' ');
-
-            var finalWords = new StringBuilder(oneWord.Length + 3);
-            for (var i = 0; i < words.Length - 1; i++)
-            {
-                finalWords.Append(words[i]);
-                if (words[i].Length == 1 && words[i + 1].Length == 1)
+                if (ChatTypeMap.TryGetLogFilterName(this.data, this.localizer.GameDataLanguage, chatType, out var logFilterName))
                 {
-                    continue;
+                    return logFilterName;
                 }
 
-                finalWords.Append(" ");
+                if (ChatTypeMap.TryGetAddonName(this.data, this.localizer.GameDataLanguage, chatType, out var addonName))
+                {
+                    return addonName;
+                }
             }
 
-            return finalWords.Append(words.Last()).ToString();
+            if (!this.localizer.HasGameDataSheet &&
+                ChatTypeMap.TryGetResourceName(chatType, this.localizer, out var resourceName))
+            {
+                return resourceName;
+            }
+
+            return $"[{chatType}]";
         }
 
         private void DrawTriggersExclusions()
