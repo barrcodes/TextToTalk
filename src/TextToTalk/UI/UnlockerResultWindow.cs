@@ -19,5 +19,10 @@ namespace TextToTalk.UI
         {
             ImGui.TextWrapped(Text ?? "");
         }
+
+        public override void PreDraw()
+        {
+            WindowName = Strings.Get("VoiceUnlockerResultTitle");
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace TextToTalk.UI
 
         public override void PreDraw()
         {
+            WindowName = Strings.Get("VoiceUnlockerTitle");
             ImGui.PushStyleColor(ImGuiCol.TitleBgActive, ImColor.Red);
             ImGui.PushStyleColor(ImGuiCol.CheckMark, ImColor.Red);
             ImGui.PushStyleColor(ImGuiCol.ButtonActive, ImColor.LightRed);

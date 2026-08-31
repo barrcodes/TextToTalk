@@ -1,5 +1,6 @@
 using System.Globalization;
 using TextToTalk.Localization;
+using TextToTalk.Resources;
 using Xunit;
 
 namespace TextToTalk.Tests.Localization;
@@ -21,17 +22,17 @@ public class LocalizerTests
     [Fact]
     public void UsesEnglishResourcesWhenTranslationIsUnavailable()
     {
-        var localizer = new Localizer("pt");
+        _ = new Localizer("pt");
 
-        Assert.Equal("TextToTalk Configuration", localizer.Get("ConfigurationTitle"));
+        Assert.Equal("TextToTalk Configuration", Strings.Get("ConfigurationTitle"));
     }
 
     [Fact]
     public void UsesEnumNameForLocalizedChatTypeResource()
     {
-        var localizer = new Localizer("it");
+        _ = new Localizer("it");
 
-        Assert.Equal("Dire", localizer.Get("ChatTypeSay"));
+        Assert.Equal("Dire", Strings.Get("ChatTypeSay"));
     }
 
 }

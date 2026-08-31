@@ -611,6 +611,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>Hvis flere forhåndsinnstillinger velges per kjønn, blir de tilfeldig tildelt karakterer.</value>
   </data>
+  <data name="BackendSwitchFailed"><value>Kunne ikke bytte til {0}-backend.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>Du har ingen konfigurerte stemmeforhåndsinnstillinger.</value></data>
+  <data name="BackendCreatePresetHint"><value>Opprett en stemmeforhåndsinnstilling i TextToTalk-konfigurasjonen.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>Port</value>

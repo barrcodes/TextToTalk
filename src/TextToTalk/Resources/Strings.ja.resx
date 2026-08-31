@@ -154,6 +154,10 @@
   <data name="BackendNoVoiceSelected"><value>ボイスが選択されていません</value></data>
   <data name="BackendMultiplePresetsHint"><value>性別ごとに複数のプリセットを選択した場合、キャラクターにランダムで割り当てられます。</value></data>
 
+  <data name="BackendSwitchFailed"><value>{0}バックエンドへの切り替えに失敗しました。</value></data>
+  <data name="BackendNoPresetsConfigured"><value>音声プリセットが設定されていません。</value></data>
+  <data name="BackendCreatePresetHint"><value>TextToTalkの設定で音声プリセットを作成してください。</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort"><value>ポート</value></data>
   <data name="MegaphonePortOutOfRange"><value>ポートが範囲外です [0, 65535]</value></data>

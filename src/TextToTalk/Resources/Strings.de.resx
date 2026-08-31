@@ -154,6 +154,10 @@
   <data name="BackendNoVoiceSelected"><value>Keine Stimme ausgewählt</value></data>
   <data name="BackendMultiplePresetsHint"><value>Wenn pro Geschlecht mehrere Voreinstellungen ausgewählt sind, werden sie den Charakteren zufällig zugewiesen.</value></data>
 
+  <data name="BackendSwitchFailed"><value>Wechsel zum {0}-Backend fehlgeschlagen.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>Du hast keine Sprachvoreinstellungen konfiguriert.</value></data>
+  <data name="BackendCreatePresetHint"><value>Bitte erstelle eine Sprachvoreinstellung in der TextToTalk-Konfiguration.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort"><value>Port</value></data>
   <data name="MegaphonePortOutOfRange"><value>Port liegt außerhalb des gültigen Bereichs [0, 65535]</value></data>

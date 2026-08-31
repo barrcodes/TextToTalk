@@ -153,6 +153,9 @@
   <data name="BackendVoiceUnsupported"><value>Voice not supported on this engine</value></data>
   <data name="BackendNoVoiceSelected"><value>No voice selected</value></data>
   <data name="BackendMultiplePresetsHint"><value>If multiple presets are selected per gender, they will be randomly assigned to characters.</value></data>
+  <data name="BackendSwitchFailed"><value>Failed to switch to {0} backend.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>You have no voice presets configured.</value></data>
+  <data name="BackendCreatePresetHint"><value>Please create a voice preset in the TextToTalk configuration.</value></data>
 
   <!-- Megaphone -->
   <data name="MegaphonePort"><value>Port</value></data>

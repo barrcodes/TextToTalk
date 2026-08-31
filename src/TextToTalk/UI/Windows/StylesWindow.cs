@@ -116,6 +116,11 @@ namespace TextToTalk.UI.Windows
             }
         }
 
+        public override void PreDraw()
+        {
+            WindowName = Strings.Get("VoiceStylesTitle");
+        }
+
         private IVoiceStylesWindow? GetOrCreateComponent(VoiceBackend backend, PluginConfiguration config)
         {
             var type = backend.GetType();

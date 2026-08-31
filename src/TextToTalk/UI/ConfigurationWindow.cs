@@ -716,7 +716,7 @@ namespace TextToTalk.UI
             }
 
             if (!this.localizer.HasGameDataSheet &&
-                ChatTypeMap.TryGetResourceName(chatType, this.localizer, out var resourceName))
+                    ChatTypeMap.TryGetResourceName(chatType, out var resourceName))
             {
                 return resourceName;
             }

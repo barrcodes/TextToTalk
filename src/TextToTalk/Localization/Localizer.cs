@@ -47,9 +47,6 @@ public sealed class Localizer
         return CultureInfo.GetCultureInfo(cultureName);
     }
 
-    public string Get(string key) =>
-        Strings.ResourceManager.GetString(key, Culture) ?? $"[{key}]";
-
     public string Format(string template, params object?[] args) =>
         string.Format(Culture, template, args);
 }

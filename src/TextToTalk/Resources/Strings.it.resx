@@ -610,6 +610,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>Se vengono selezionati più preset per genere, verranno assegnati casualmente ai personaggi.</value>
   </data>
+  <data name="BackendSwitchFailed"><value>Impossibile passare al backend {0}.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>Non hai configurato alcun preset vocale.</value></data>
+  <data name="BackendCreatePresetHint"><value>Crea un preset vocale nella configurazione di TextToTalk.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>Porta</value>

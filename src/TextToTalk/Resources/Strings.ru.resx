@@ -612,6 +612,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>Если для одного пола выбрано несколько пресетов, они будут случайным образом назначаться персонажам.</value>
   </data>
+  <data name="BackendSwitchFailed"><value>Не удалось переключиться на бэкенд {0}.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>У вас не настроены голосовые пресеты.</value></data>
+  <data name="BackendCreatePresetHint"><value>Создайте голосовой пресет в настройках TextToTalk.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>Порт</value>

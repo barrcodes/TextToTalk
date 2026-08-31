@@ -610,6 +610,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>如果每种性别选择了多个预设，它们将随机分配给角色。</value>
   </data>
+  <data name="BackendSwitchFailed"><value>无法切换到 {0} 后端。</value></data>
+  <data name="BackendNoPresetsConfigured"><value>你尚未配置任何语音预设。</value></data>
+  <data name="BackendCreatePresetHint"><value>请在 TextToTalk 配置中创建语音预设。</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>端口</value>

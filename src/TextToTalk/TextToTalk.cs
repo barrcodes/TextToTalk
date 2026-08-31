@@ -122,7 +122,6 @@ private readonly IDalamudPluginInterface pluginInterface;
             this.pluginInterface = pi;
             this.clientState = clientState;
             this.localizer = new Localizer(pi.UiLanguage);
-            this.localizer.SetUiLanguage(pi.UiLanguage);
             this.pluginInterface.LanguageChanged += OnDalamudLanguageChanged;
             this.objects = objects;
             this.keys = keyState;

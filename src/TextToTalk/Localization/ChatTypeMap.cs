@@ -44,11 +44,11 @@ namespace TextToTalk.Localization
             return enableAllChatTypes || enabledChatTypes?.Contains((int)chatType) == true;
         }
 
-        internal static bool TryGetResourceName(int chatType, Localizer localizer, out string name)
+        internal static bool TryGetResourceName(int chatType, out string name)
         {
             var enumName = Enum.GetName(typeof(XivChatType), (ushort)chatType)
                            ?? Enum.GetName(typeof(AdditionalChatType), chatType);
-            name = enumName is null ? string.Empty : localizer.Get($"ChatType{enumName}");
+            name = enumName is null ? string.Empty : Strings.Get($"ChatType{enumName}");
             return name.Length > 0 && !name.StartsWith("[", StringComparison.Ordinal);
         }
 

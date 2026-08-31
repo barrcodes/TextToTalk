@@ -611,6 +611,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>Si se seleccionan varios preajustes por género, se asignarán aleatoriamente a los personajes.</value>
   </data>
+  <data name="BackendSwitchFailed"><value>No se pudo cambiar al backend {0}.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>No tienes ningún preajuste de voz configurado.</value></data>
+  <data name="BackendCreatePresetHint"><value>Crea un preajuste de voz en la configuración de TextToTalk.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>Puerto</value>

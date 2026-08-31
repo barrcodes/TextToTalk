@@ -58,5 +58,10 @@ namespace TextToTalk.UI
                 IsOpen = false;
             }
         }
+
+        public override void PreDraw()
+        {
+            WindowName = $"{Strings.Get("ChannelPresetWindowTitle")}##TTTPresetWindow";
+        }
     }
 }

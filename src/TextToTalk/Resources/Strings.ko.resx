@@ -610,6 +610,10 @@
   <data name="BackendMultiplePresetsHint">
     <value>성별마다 여러 프리셋을 선택하면 캐릭터에 무작위로 할당됩니다.</value>
   </data>
+  <data name="BackendSwitchFailed"><value>{0} 백엔드로 전환하지 못했습니다.</value></data>
+  <data name="BackendNoPresetsConfigured"><value>설정된 음성 프리셋이 없습니다.</value></data>
+  <data name="BackendCreatePresetHint"><value>TextToTalk 설정에서 음성 프리셋을 만들어 주세요.</value></data>
+
   <!-- Megaphone -->
   <data name="MegaphonePort">
     <value>포트</value>
