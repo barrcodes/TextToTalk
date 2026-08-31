@@ -217,7 +217,7 @@
     <value>è¯´è¯</value>
   </data>
   <data name="ChatTypeShout">
-    <value>å–Šè¯</value>
+    <value>喊话</value>
   </data>
   <data name="ChatTypeParty">
     <value>小队</value>
@@ -256,10 +256,10 @@
     <value>通讯贝 8</value>
   </data>
   <data name="ChatTypeYell">
-    <value>å‘¼å–Š</value>
+    <value>呼喊</value>
   </data>
   <data name="ChatTypeAlliance">
-    <value>è”ç›Ÿ</value>
+    <value>联盟</value>
   </data>
   <data name="ChatTypeNoviceNetwork">
     <value>新人频道</value>
@@ -313,7 +313,7 @@
     <value>部队公告</value>
   </data>
   <data name="ChatTypeFreeCompanyLoginLogout">
-    <value>部队成员登录通知</value>
+    <value>部队成员登录／登出通知</value>
   </data>
   <data name="ChatTypeRetainerSale">
     <value>雇员出售物品</value>
@@ -334,7 +334,7 @@
     <value>PvP 战队公告</value>
   </data>
   <data name="ChatTypePvpTeamLoginLogout">
-    <value>PvP 战队登录通知</value>
+    <value>PvP 战队登录／登出通知</value>
   </data>
   <data name="ChatTypeDamage">
     <value>伤害</value>
@@ -346,7 +346,7 @@
     <value>技能</value>
   </data>
   <data name="ChatTypeItem">
-    <value>ç‰©å“</value>
+    <value>物品</value>
   </data>
   <data name="ChatTypeHealing">
     <value>恢复</value>
@@ -355,7 +355,7 @@
     <value>获得增益效果</value>
   </data>
   <data name="ChatTypeGainDebuff">
-    <value>施加减益效果</value>
+    <value>获得减益效果</value>
   </data>
   <data name="ChatTypeDamageYouAreDealt">
     <value>你受到的伤害</value>

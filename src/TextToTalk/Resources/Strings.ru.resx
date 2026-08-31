@@ -269,7 +269,7 @@
     <value>PvP-команда</value>
   </data>
   <data name="ChatTypeCrossLinkShell1">
-    <value>Межмировой линкселл</value>
+    <value>Межмировой линкселл 1</value>
   </data>
   <data name="ChatTypeSystemMessage">
     <value>Системные сообщения</value>
@@ -314,7 +314,7 @@
     <value>Объявления свободной компании</value>
   </data>
   <data name="ChatTypeFreeCompanyLoginLogout">
-    <value>Уведомления о входе участников свободной компании</value>
+    <value>Уведомления о входе и выходе участников свободной компании</value>
   </data>
   <data name="ChatTypeRetainerSale">
     <value>Продажа через слугу</value>
@@ -335,7 +335,7 @@
     <value>Объявления PvP-команды</value>
   </data>
   <data name="ChatTypePvpTeamLoginLogout">
-    <value>Уведомления о входе участников PvP-команды</value>
+    <value>Уведомления о входе и выходе участников PvP-команды</value>
   </data>
   <data name="ChatTypeDamage">
     <value>Урон</value>
@@ -653,7 +653,7 @@
     <value>Действие</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>Полученный отрицательный эффект</value>
+    <value>Отрицательный эффект, наложенный вами</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>Снятый положительный эффект</value>

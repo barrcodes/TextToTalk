@@ -224,10 +224,10 @@
     <value>Grupo</value>
   </data>
   <data name="ChatTypeStandardEmote">
-    <value>Emoción estándar</value>
+    <value>Emote estándar</value>
   </data>
   <data name="ChatTypeCustomEmote">
-    <value>Emoción personalizada</value>
+    <value>Emote personalizado</value>
   </data>
   <data name="ChatTypeFreeCompany">
     <value>Compañía libre</value>
@@ -640,7 +640,7 @@
     <value>Reiniciar servidor</value>
   </data>
   <data name="ChatTypeFreeCompanyMemberLoginNotifications">
-    <value>Notificaciones de inicio y cierre de sesión de miembros de la compañía libre</value>
+    <value>Notificaciones de inicio de sesión de miembros de la compañía libre</value>
   </data>
   <data name="ChatTypeDamageDealtByYou">
     <value>Daño</value>
@@ -652,7 +652,7 @@
     <value>Acción</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>Obtención de efecto perjudicial</value>
+    <value>Efecto perjudicial infligido por ti</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>Efecto beneficioso perdido</value>

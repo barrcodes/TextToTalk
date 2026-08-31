@@ -212,13 +212,13 @@
   </data>
   <!-- FFXIV Channel Labels -->
   <data name="ChatTypeNone">
-    <value>ç„¡</value>
+    <value>無</value>
   </data>
   <data name="ChatTypeSay">
     <value>èªªè©±</value>
   </data>
   <data name="ChatTypeShout">
-    <value>å–Šè©±</value>
+    <value>喊話</value>
   </data>
   <data name="ChatTypeParty">
     <value>隊伍</value>
@@ -257,10 +257,10 @@
     <value>聯絡貝 8</value>
   </data>
   <data name="ChatTypeYell">
-    <value>å‘¼å–Š</value>
+    <value>呼喊</value>
   </data>
   <data name="ChatTypeAlliance">
-    <value>è¯ç›Ÿ</value>
+    <value>聯盟</value>
   </data>
   <data name="ChatTypeNoviceNetwork">
     <value>新人頻道</value>
@@ -344,7 +344,7 @@
     <value>未命中</value>
   </data>
   <data name="ChatTypeAction">
-    <value>è¡Œå‹•</value>
+    <value>行動</value>
   </data>
   <data name="ChatTypeItem">
     <value>道具</value>
@@ -640,7 +640,7 @@
     <value>重新啟動伺服器</value>
   </data>
   <data name="ChatTypeFreeCompanyMemberLoginNotifications">
-    <value>部隊成員登入／登出</value>
+    <value>部隊成員登入通知</value>
   </data>
   <data name="ChatTypeDamageDealtByYou">
     <value>傷害</value>
@@ -649,10 +649,10 @@
     <value>未命中</value>
   </data>
   <data name="ChatTypeActionReadiedByYou">
-    <value>è¡Œå‹•</value>
+    <value>行動</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>獲得減益效果</value>
+    <value>你施加的減益效果</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>失去增益效果</value>

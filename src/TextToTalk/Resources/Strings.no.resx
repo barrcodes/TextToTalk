@@ -158,7 +158,7 @@
     <value>Legg til spiller</value>
   </data>
   <data name="PlayerAddFailedDuplicate">
-    <value>Kunne ikke legge til spilleren – er dette en duplikat?</value>
+    <value>Kunne ikke legge til spilleren – er dette et duplikat?</value>
   </data>
   <!-- NPC Voices -->
   <data name="NpcVoicesHint">
@@ -174,7 +174,7 @@
     <value>Legg til NPC</value>
   </data>
   <data name="NpcAddFailedDuplicate">
-    <value>Kunne ikke legge til NPC-en – er dette en duplikat?</value>
+    <value>Kunne ikke legge til NPC-en – er dette et duplikat?</value>
   </data>
   <!-- Channel Settings -->
   <data name="ChannelPreset">
@@ -257,7 +257,7 @@
     <value>Linkshell 8</value>
   </data>
   <data name="ChatTypeYell">
-    <value>Rop</value>
+    <value>Hyl</value>
   </data>
   <data name="ChatTypeAlliance">
     <value>Allianse</value>
@@ -314,7 +314,7 @@
     <value>Frikompani-kunngjøringer</value>
   </data>
   <data name="ChatTypeFreeCompanyLoginLogout">
-    <value>Innloggingsvarsler for frikompani</value>
+    <value>Innloggings- og utloggingsvarsler for frikompani</value>
   </data>
   <data name="ChatTypeRetainerSale">
     <value>Retainersalg</value>
@@ -335,7 +335,7 @@
     <value>PvP-lagkunngjøringer</value>
   </data>
   <data name="ChatTypePvpTeamLoginLogout">
-    <value>Innloggingsvarsler for PvP-lag</value>
+    <value>Innloggings- og utloggingsvarsler for PvP-lag</value>
   </data>
   <data name="ChatTypeDamage">
     <value>Skade</value>
@@ -395,7 +395,7 @@
     <value>Positive effekter på andre spillere som tar slutt</value>
   </data>
   <data name="ChatTypeActionReadiedByEngagedEnemy">
-    <value>Handlinger gjort klare av engasjert fiende</value>
+    <value>Handlinger gjort klare av fiende i kamp</value>
   </data>
   <data name="ChatTypeDetrimentalEffectOnEnemyEnded">
     <value>Negative effekter på fienden som tar slutt</value>
@@ -652,7 +652,7 @@
     <value>Handlinger</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>Negative effekter</value>
+    <value>Negative effekter påført av deg</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>Positive effekter som tar slutt</value>

@@ -313,7 +313,7 @@
     <value>Annunci della compagnia libera</value>
   </data>
   <data name="ChatTypeFreeCompanyLoginLogout">
-    <value>Accessi alla compagnia libera</value>
+    <value>Accessi e disconnessioni della compagnia libera</value>
   </data>
   <data name="ChatTypeRetainerSale">
     <value>Vendite del servitore</value>
@@ -334,7 +334,7 @@
     <value>Annunci della squadra PvP</value>
   </data>
   <data name="ChatTypePvpTeamLoginLogout">
-    <value>Accessi alla squadra PvP</value>
+    <value>Accessi e disconnessioni della squadra PvP</value>
   </data>
   <data name="ChatTypeDamage">
     <value>Danni</value>
@@ -571,7 +571,7 @@
     <value>Disinstalla</value>
   </data>
   <data name="ActionUpdating">
-    <value>Aggiornamento</value>
+    <value>Aggiornamento in corso</value>
   </data>
   <data name="ActionUpdate">
     <value>Aggiorna</value>
@@ -651,7 +651,7 @@
     <value>Azioni</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>Effetti debilitanti</value>
+    <value>Effetti debilitanti inflitti da te</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>Effetti benefici terminati</value>

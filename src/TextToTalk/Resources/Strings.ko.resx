@@ -256,7 +256,7 @@
     <value>링크셸 8</value>
   </data>
   <data name="ChatTypeYell">
-    <value>ê³ í•¨</value>
+    <value>고함</value>
   </data>
   <data name="ChatTypeAlliance">
     <value>연합 파티</value>
@@ -283,7 +283,7 @@
     <value>에코</value>
   </data>
   <data name="ChatTypeNPCDialogue">
-    <value>NPC ëŒ€í™”</value>
+    <value>NPC 대화</value>
   </data>
   <data name="ChatTypeLootNotice">
     <value>전리품 알림</value>
@@ -307,13 +307,13 @@
     <value>시스템 오류</value>
   </data>
   <data name="ChatTypeNPCDialogueAnnouncements">
-    <value>NPC ëŒ€í™” ì•Œë¦¼</value>
+    <value>NPC 대화 알림</value>
   </data>
   <data name="ChatTypeFreeCompanyAnnouncement">
     <value>자유부대 알림</value>
   </data>
   <data name="ChatTypeFreeCompanyLoginLogout">
-    <value>자유부대 접속 알림</value>
+    <value>자유부대 접속 및 로그아웃 알림</value>
   </data>
   <data name="ChatTypeRetainerSale">
     <value>집사 판매</value>
@@ -334,16 +334,16 @@
     <value>PvP 팀 알림</value>
   </data>
   <data name="ChatTypePvpTeamLoginLogout">
-    <value>PvP 팀 접속 알림</value>
+    <value>PvP 팀 접속 및 로그아웃 알림</value>
   </data>
   <data name="ChatTypeDamage">
-    <value>í”¼í•´</value>
+    <value>피해</value>
   </data>
   <data name="ChatTypeMiss">
     <value>ë¹—ë‚˜ê°</value>
   </data>
   <data name="ChatTypeAction">
-    <value>í–‰ë™</value>
+    <value>행동</value>
   </data>
   <data name="ChatTypeItem">
     <value>아이템</value>
@@ -376,7 +376,7 @@
     <value>해로운 효과 종료</value>
   </data>
   <data name="ChatTypeAlarm">
-    <value>ì•ŒëžŒ</value>
+    <value>알람</value>
   </data>
   <data name="ChatTypeGlamourNotifications">
     <value>환상장비 알림</value>
@@ -424,7 +424,7 @@
     <value>ê¸´ê¸‰</value>
   </data>
   <data name="ChatTypeNotice">
-    <value>ì•Œë¦¼</value>
+    <value>알림</value>
   </data>
   <!-- Triggers and Exclusions -->
   <data name="EnableAllChatTypesIncludingUndocumented">
@@ -642,16 +642,16 @@
     <value>자유부대 접속 알림</value>
   </data>
   <data name="ChatTypeDamageDealtByYou">
-    <value>í”¼í•´</value>
+    <value>피해</value>
   </data>
   <data name="ChatTypeFailedAttacksOnYou">
     <value>ë¹—ë‚˜ê°</value>
   </data>
   <data name="ChatTypeActionReadiedByYou">
-    <value>í–‰ë™</value>
+    <value>행동</value>
   </data>
   <data name="ChatTypeDetrimentalEffectsInflictedByYou">
-    <value>해로운 효과 획득</value>
+    <value>자신이 부여한 해로운 효과</value>
   </data>
   <data name="ChatTypeBeneficialEffectOnYouEnded">
     <value>이로운 효과 종료</value>
