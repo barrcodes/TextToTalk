@@ -12,6 +12,8 @@ namespace TextToTalk.Localization
 {
     internal static class ChatTypeMap
     {
+        private static readonly Dictionary<(ClientLanguage Language, int ChatType), string> LogFilterNames = new();
+
         internal static readonly IReadOnlyDictionary<int, uint> AddonRowIds =
             new Dictionary<int, uint>
             {
@@ -69,10 +71,16 @@ namespace TextToTalk.Localization
 
         internal static bool TryGetLogFilterName(IDataManager data, ClientLanguage language, int chatType, out string name)
         {
-            name = string.Empty;
-            return data.GetExcelSheet<LogFilter>(language)?.FirstOrDefault(row =>
-                       (int)row.LogKind == chatType && !string.IsNullOrWhiteSpace(row.Name.ToString())) is { } row
-                   && !string.IsNullOrWhiteSpace(name = row.Name.ToString());
+            var key = (language, chatType);
+            if (!LogFilterNames.TryGetValue(key, out name!))
+            {
+                name = data.GetExcelSheet<LogFilter>(language)?.FirstOrDefault(row =>
+                           (int)row.LogKind == chatType && !string.IsNullOrWhiteSpace(row.Name.ToString())).Name.ToString()
+                       ?? string.Empty;
+                LogFilterNames[key] = name;
+            }
+
+            return !string.IsNullOrWhiteSpace(name);
         }
 
         internal static bool TryGetAddonName(IDataManager data, ClientLanguage language, int chatType, out string name)
