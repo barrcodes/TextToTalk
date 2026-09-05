@@ -721,7 +721,39 @@ namespace TextToTalk.UI
                 return resourceName;
             }
 
-            return $"[{chatType}]";
+            var channel = Enum.GetName(typeof(XivChatType), (ushort)chatType)
+                          ?? Enum.GetName(typeof(AdditionalChatType), chatType);
+            return channel is null ? $"[{chatType}]" : FormatChatChannelName(channel);
+        }
+
+        private static string FormatChatChannelName(string channel)
+        {
+            var split = channel == "PvPTeam" ? "PvP Team" : SplitWords(channel);
+            return split.StartsWith("Ls ") ? split.ToUpper() : split;
+        }
+
+        private static string SplitWords(string oneWord)
+        {
+            var words = oneWord
+                .Select(c => c)
+                .Skip(1)
+                .Aggregate("" + oneWord[0],
+                    (acc, c) => acc + (c is >= 'A' and <= 'Z' or >= '0' and <= '9' ? " " + c : "" + c))
+                .Split(' ');
+
+            var finalWords = new StringBuilder(oneWord.Length + 3);
+            for (var i = 0; i < words.Length - 1; i++)
+            {
+                finalWords.Append(words[i]);
+                if (words[i].Length == 1 && words[i + 1].Length == 1)
+                {
+                    continue;
+                }
+
+                finalWords.Append(" ");
+            }
+
+            return finalWords.Append(words.Last()).ToString();
         }
 
         private void DrawTriggersExclusions()
