@@ -74,9 +74,13 @@ namespace TextToTalk.Localization
             var key = (language, chatType);
             if (!LogFilterNames.TryGetValue(key, out name!))
             {
-                name = data.GetExcelSheet<LogFilter>(language)?.FirstOrDefault(row =>
-                           (int)row.LogKind == chatType && !string.IsNullOrWhiteSpace(row.Name.ToString())).Name.ToString()
-                       ?? string.Empty;
+                name = string.Empty;
+                if (data.GetExcelSheet<LogFilter>(language)?.FirstOrDefault(row =>
+                        (int)row.LogKind == chatType && !string.IsNullOrWhiteSpace(row.Name.ToString())) is { } row)
+                {
+                    name = row.Name.ToString();
+                }
+
                 LogFilterNames[key] = name;
             }
 
