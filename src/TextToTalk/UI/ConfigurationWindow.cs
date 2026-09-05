@@ -728,7 +728,10 @@ namespace TextToTalk.UI
 
         private static string FormatChatChannelName(string channel)
         {
+            // Split enum value name into words
             var split = channel == "PvPTeam" ? "PvP Team" : SplitWords(channel);
+
+            // Handle linkshells
             return split.StartsWith("Ls ") ? split.ToUpper() : split;
         }
 
